@@ -54,7 +54,9 @@ export type AccountOrderByInput =   'createdAt_ASC' |
   'wallet_ASC' |
   'wallet_DESC' |
   'balance_ASC' |
-  'balance_DESC'
+  'balance_DESC' |
+  'substrateChain_ASC' |
+  'substrateChain_DESC'
 
 export type HistoricalBalanceOrderByInput =   'createdAt_ASC' |
   'createdAt_DESC' |
@@ -67,16 +69,20 @@ export type HistoricalBalanceOrderByInput =   'createdAt_ASC' |
   'balance_ASC' |
   'balance_DESC' |
   'timestamp_ASC' |
-  'timestamp_DESC'
+  'timestamp_DESC' |
+  'substrateChain_ASC' |
+  'substrateChain_DESC'
 
 export interface AccountCreateInput {
   wallet: String
   balance: String
+  substrateChain: String
 }
 
 export interface AccountUpdateInput {
   wallet?: String | null
   balance?: String | null
+  substrateChain?: String | null
 }
 
 export interface AccountWhereInput {
@@ -115,6 +121,11 @@ export interface AccountWhereInput {
   balance_lt?: BigInt | null
   balance_lte?: BigInt | null
   balance_in?: BigInt[] | BigInt | null
+  substrateChain_eq?: String | null
+  substrateChain_contains?: String | null
+  substrateChain_startsWith?: String | null
+  substrateChain_endsWith?: String | null
+  substrateChain_in?: String[] | String | null
   historicalBalances_none?: HistoricalBalanceWhereInput | null
   historicalBalances_some?: HistoricalBalanceWhereInput | null
   historicalBalances_every?: HistoricalBalanceWhereInput | null
@@ -154,12 +165,14 @@ export interface HistoricalBalanceCreateInput {
   account: ID_Output
   balance: String
   timestamp: String
+  substrateChain: String
 }
 
 export interface HistoricalBalanceUpdateInput {
   account?: ID_Input | null
   balance?: String | null
   timestamp?: String | null
+  substrateChain?: String | null
 }
 
 export interface HistoricalBalanceWhereInput {
@@ -199,6 +212,11 @@ export interface HistoricalBalanceWhereInput {
   timestamp_lt?: BigInt | null
   timestamp_lte?: BigInt | null
   timestamp_in?: BigInt[] | BigInt | null
+  substrateChain_eq?: String | null
+  substrateChain_contains?: String | null
+  substrateChain_startsWith?: String | null
+  substrateChain_endsWith?: String | null
+  substrateChain_in?: String[] | String | null
   account?: AccountWhereInput | null
   AND?: HistoricalBalanceWhereInput[] | HistoricalBalanceWhereInput | null
   OR?: HistoricalBalanceWhereInput[] | HistoricalBalanceWhereInput | null
@@ -235,6 +253,7 @@ export interface Account extends BaseGraphQLObject {
   wallet: String
   balance: BigInt
   historicalBalances: Array<HistoricalBalance>
+  substrateChain: String
 }
 
 export interface AccountConnection {
@@ -287,6 +306,7 @@ export interface HistoricalBalance extends BaseGraphQLObject {
   accountId: String
   balance: BigInt
   timestamp: BigInt
+  substrateChain: String
 }
 
 export interface HistoricalBalanceConnection {

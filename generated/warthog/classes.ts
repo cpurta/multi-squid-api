@@ -46,6 +46,9 @@ export enum HistoricalBalanceOrderByEnum {
 
   timestamp_ASC = "timestamp_ASC",
   timestamp_DESC = "timestamp_DESC",
+
+  substrateChain_ASC = "substrateChain_ASC",
+  substrateChain_DESC = "substrateChain_DESC",
 }
 
 registerEnumType(HistoricalBalanceOrderByEnum, {
@@ -162,6 +165,21 @@ export class HistoricalBalanceWhereInput {
   @TypeGraphQLField(() => [BigInt], { nullable: true })
   timestamp_in?: string[];
 
+  @TypeGraphQLField({ nullable: true })
+  substrateChain_eq?: string;
+
+  @TypeGraphQLField({ nullable: true })
+  substrateChain_contains?: string;
+
+  @TypeGraphQLField({ nullable: true })
+  substrateChain_startsWith?: string;
+
+  @TypeGraphQLField({ nullable: true })
+  substrateChain_endsWith?: string;
+
+  @TypeGraphQLField(() => [String], { nullable: true })
+  substrateChain_in?: string[];
+
   @TypeGraphQLField(() => AccountWhereInput, { nullable: true })
   account?: AccountWhereInput;
 
@@ -188,6 +206,9 @@ export class HistoricalBalanceCreateInput {
 
   @TypeGraphQLField()
   timestamp!: string;
+
+  @TypeGraphQLField()
+  substrateChain!: string;
 }
 
 @TypeGraphQLInputType()
@@ -200,6 +221,9 @@ export class HistoricalBalanceUpdateInput {
 
   @TypeGraphQLField({ nullable: true })
   timestamp?: string;
+
+  @TypeGraphQLField({ nullable: true })
+  substrateChain?: string;
 }
 
 @ArgsType()
@@ -238,6 +262,9 @@ export enum AccountOrderByEnum {
 
   balance_ASC = "balance_ASC",
   balance_DESC = "balance_DESC",
+
+  substrateChain_ASC = "substrateChain_ASC",
+  substrateChain_DESC = "substrateChain_DESC",
 }
 
 registerEnumType(AccountOrderByEnum, {
@@ -351,6 +378,21 @@ export class AccountWhereInput {
   @TypeGraphQLField(() => [BigInt], { nullable: true })
   balance_in?: string[];
 
+  @TypeGraphQLField({ nullable: true })
+  substrateChain_eq?: string;
+
+  @TypeGraphQLField({ nullable: true })
+  substrateChain_contains?: string;
+
+  @TypeGraphQLField({ nullable: true })
+  substrateChain_startsWith?: string;
+
+  @TypeGraphQLField({ nullable: true })
+  substrateChain_endsWith?: string;
+
+  @TypeGraphQLField(() => [String], { nullable: true })
+  substrateChain_in?: string[];
+
   @TypeGraphQLField(() => HistoricalBalanceWhereInput, { nullable: true })
   historicalBalances_none?: HistoricalBalanceWhereInput;
 
@@ -380,6 +422,9 @@ export class AccountCreateInput {
 
   @TypeGraphQLField()
   balance!: string;
+
+  @TypeGraphQLField()
+  substrateChain!: string;
 }
 
 @TypeGraphQLInputType()
@@ -389,6 +434,9 @@ export class AccountUpdateInput {
 
   @TypeGraphQLField({ nullable: true })
   balance?: string;
+
+  @TypeGraphQLField({ nullable: true })
+  substrateChain?: string;
 }
 
 @ArgsType()

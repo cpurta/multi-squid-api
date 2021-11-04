@@ -6,17 +6,44 @@ hydraVersion: "4"
 typegen:
   metadata:
     source: wss://kusama-rpc.polkadot.io/
+    blockHash: '0x45eb7ddd324361adadd4f8cfafadbfb7e0a26393a70a70e5bee6204fc46af62e'
   events:
     - balances.Transfer
   calls:
     - timestamp.set
-  outDir: chain
+  outDir: chain/kusama
+
+# typegen:
+#   metadata:
+#     source: wss://rpc.polkadot.io/
+#     blockHash: '0x85b133210631562ef26d3cb1a0781396ab13fa5e2118a74c4f8ed59c6cf8c9ab'
+#   events:
+#     - balances.Transfer
+#   calls:
+#     - timestamp.set
+#   outDir: chain/polkadot
+
+processor:
+  chains:
+    - name: kusama
+      indexerEndpointURL: https://kusama.indexer.gc.subsquid.io/v4/graphql
+    - name: polkadot
+      indexerEndpointURL: https://polkadot.indexer.gc.subsquid.io/v4/graphql
 
 mappings:
-  mappingsModule: mappings
-  eventHandlers:
-    - event: balances.Transfer
-      handler: balancesTransfer
-  extrinsicHandlers:
-  preBlockHooks:
-  postBlockHooks:
+  - substrateChain: kusama
+    mappingsModule: mappings/kusama
+    eventHandlers:
+      - event: balances.Transfer
+        handler: balancesTransfer
+    extrinsicHandlers:
+    preBlockHooks:
+    postBlockHooks:
+  - substrateChain: polkadot
+    mappingsModule: mappings/polkadot
+    eventHandlers:
+      - event: balances.Transfer
+        handler: balancesTransfer
+    extrinsicHandlers:
+    preBlockHooks:
+    postBlockHooks:

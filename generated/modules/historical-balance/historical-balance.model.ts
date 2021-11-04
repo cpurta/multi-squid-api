@@ -35,6 +35,9 @@ export class HistoricalBalance extends BaseModel {
   })
   timestamp!: BN;
 
+  @StringField({})
+  substrateChain!: string;
+
   constructor(init?: Partial<HistoricalBalance>) {
     super();
     Object.assign(this, init);

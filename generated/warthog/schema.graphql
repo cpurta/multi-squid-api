@@ -10,6 +10,7 @@ type Account implements BaseGraphQLObject {
   wallet: String!
   balance: BigInt!
   historicalBalances: [HistoricalBalance!]!
+  substrateChain: String!
 }
 
 type AccountConnection {
@@ -21,6 +22,7 @@ type AccountConnection {
 input AccountCreateInput {
   wallet: String!
   balance: String!
+  substrateChain: String!
 }
 
 type AccountEdge {
@@ -39,11 +41,14 @@ enum AccountOrderByInput {
   wallet_DESC
   balance_ASC
   balance_DESC
+  substrateChain_ASC
+  substrateChain_DESC
 }
 
 input AccountUpdateInput {
   wallet: String
   balance: String
+  substrateChain: String
 }
 
 input AccountWhereInput {
@@ -82,6 +87,11 @@ input AccountWhereInput {
   balance_lt: BigInt
   balance_lte: BigInt
   balance_in: [BigInt!]
+  substrateChain_eq: String
+  substrateChain_contains: String
+  substrateChain_startsWith: String
+  substrateChain_endsWith: String
+  substrateChain_in: [String!]
   historicalBalances_none: HistoricalBalanceWhereInput
   historicalBalances_some: HistoricalBalanceWhereInput
   historicalBalances_every: HistoricalBalanceWhereInput
@@ -179,6 +189,7 @@ type HistoricalBalance implements BaseGraphQLObject {
   accountId: String!
   balance: BigInt!
   timestamp: BigInt!
+  substrateChain: String!
 }
 
 type HistoricalBalanceConnection {
@@ -191,6 +202,7 @@ input HistoricalBalanceCreateInput {
   account: ID!
   balance: String!
   timestamp: String!
+  substrateChain: String!
 }
 
 type HistoricalBalanceEdge {
@@ -211,12 +223,15 @@ enum HistoricalBalanceOrderByInput {
   balance_DESC
   timestamp_ASC
   timestamp_DESC
+  substrateChain_ASC
+  substrateChain_DESC
 }
 
 input HistoricalBalanceUpdateInput {
   account: ID
   balance: String
   timestamp: String
+  substrateChain: String
 }
 
 input HistoricalBalanceWhereInput {
@@ -256,6 +271,11 @@ input HistoricalBalanceWhereInput {
   timestamp_lt: BigInt
   timestamp_lte: BigInt
   timestamp_in: [BigInt!]
+  substrateChain_eq: String
+  substrateChain_contains: String
+  substrateChain_startsWith: String
+  substrateChain_endsWith: String
+  substrateChain_in: [String!]
   account: AccountWhereInput
   AND: [HistoricalBalanceWhereInput!]
   OR: [HistoricalBalanceWhereInput!]

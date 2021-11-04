@@ -27,6 +27,9 @@ export class Account extends BaseModel {
   })
   historicalBalances?: HistoricalBalance[];
 
+  @StringField({})
+  substrateChain!: string;
+
   constructor(init?: Partial<Account>) {
     super();
     Object.assign(this, init);
