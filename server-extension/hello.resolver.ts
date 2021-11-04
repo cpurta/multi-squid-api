@@ -23,7 +23,8 @@ export class HelloResolver {
 
   @Query(() => Hello)
   async hello(): Promise<Hello> {
-    let count = await this.db.getRepository(HistoricalBalance).createQueryBuilder().getCount()
-    return new Hello(`Hello, we've seen ${count} transfers!`)
+    let kusamaCount = await this.db.getRepository(HistoricalBalance).createQueryBuilder().andWhere(`"substrate_chain" = 'kusama'`).getCount()
+    let polkadotCount = await this.db.getRepository(HistoricalBalance).createQueryBuilder().andWhere(`"substrate_chain" = 'polkadot'`).getCount()
+    return new Hello(`Hello, we've seen ${kusamaCount} Kusama transfers, and ${polkadotCount} Polkadot transfers`)
   }
 }
