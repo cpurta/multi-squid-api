@@ -11,6 +11,65 @@ can pull and process multiple chains. There is a slightly modified `schema.graph
 * Node v14x
 * Docker
 
+## Chain Type Generation
+
+Currently, in order to support multiple chains with the type generation (typegen). You can generate
+each chains generated code by commenting/uncommenting the `typegen` portion of the `manifest.yml` file.
+
+Example for polkadot `typegen`
+
+Here is what the `typegen` portion of the `manifest.yml` file will look like to generate the Polkadot `.ts` files
+```yaml
+typegen:
+  metadata:
+    source: wss://kusama-rpc.polkadot.io/
+    blockHash: '0x45eb7ddd324361adadd4f8cfafadbfb7e0a26393a70a70e5bee6204fc46af62e'
+  events:
+    - balances.Transfer
+  calls:
+    - timestamp.set
+  outDir: chain/kusama
+
+# typegen:
+#   metadata:
+#     source: wss://rpc.polkadot.io/
+#     blockHash: '0x85b133210631562ef26d3cb1a0781396ab13fa5e2118a74c4f8ed59c6cf8c9ab'
+#   events:
+#     - balances.Transfer
+#   calls:
+#     - timestamp.set
+#   outDir: chain/polkadot
+```
+
+In order to generate the Kusama `.ts` files you can flip the commented section of the `typegen` i.e.:
+
+```yml
+# typegen:
+#   metadata:
+#     source: wss://kusama-rpc.polkadot.io/
+#     blockHash: '0x45eb7ddd324361adadd4f8cfafadbfb7e0a26393a70a70e5bee6204fc46af62e'
+#   events:
+#     - balances.Transfer
+#   calls:
+#     - timestamp.set
+#   outDir: chain/kusama
+
+typegen:
+  metadata:
+    source: wss://rpc.polkadot.io/
+    blockHash: '0x85b133210631562ef26d3cb1a0781396ab13fa5e2118a74c4f8ed59c6cf8c9ab'
+  events:
+    - balances.Transfer
+  calls:
+    - timestamp.set
+  outDir: chain/polkadot
+```
+
+NOTE: There has been some work done to support multiple metadata sources and generate
+the type generations given multiple entries/sources [here](https://github.com/cpurta/hydra/tree/support-multiple-metadata-sources/packages/hydra-typegen).
+This work is **currently being tested** and has yet to be published on NPM as a package
+and imported into this project for ease of generating the multiple chain types. 
+
 ## Bootstrap
 
 ```bash
@@ -90,3 +149,9 @@ Have a look at `./indexer/docker-compose.yml` for an example of how you can set 
 ## Misc
 
 For more details, please checkout https://docs.subsquid.io.
+
+## Developer Notes
+
+Currently as of 2021/11/6 the public Polkadot idexer has been somewhat spotty in fetching block data
+and queuing those blocks to be processed by the processor. This has lead to the Kusama chain being
+processed and the Polkadot chain waiting for blocks.

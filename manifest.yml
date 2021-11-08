@@ -25,22 +25,22 @@ typegen:
 
 processor:
   chains:
-    - name: kusama
-      indexerEndpointURL: https://kusama.indexer.gc.subsquid.io/v4/graphql
     - name: polkadot
       indexerEndpointURL: https://polkadot.indexer.gc.subsquid.io/v4/graphql
+    - name: kusama
+      indexerEndpointURL: https://kusama.indexer.gc.subsquid.io/v4/graphql
 
 mappings:
-  - substrateChain: kusama
-    mappingsModule: mappings/kusama
+  - substrateChain: polkadot
+    mappingsModule: mappings/polkadot
     eventHandlers:
       - event: balances.Transfer
         handler: balancesTransfer
     extrinsicHandlers:
     preBlockHooks:
     postBlockHooks:
-  - substrateChain: polkadot
-    mappingsModule: mappings/polkadot
+  - substrateChain: kusama
+    mappingsModule: mappings/kusama
     eventHandlers:
       - event: balances.Transfer
         handler: balancesTransfer

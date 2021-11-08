@@ -19,7 +19,7 @@
     "query-node:start": "ts-node --type-check ./generated/server/index.ts"
   },
   "dependencies": {
-    "@cpurta/hydra-processor": "4.2.0-alpha.18",
+    "@cpurta/hydra-processor": "4.2.0-alpha.27",
     "@subsquid/hydra-cli": "4.2.0-alpha.0",
     "@subsquid/hydra-typegen": "4.2.0-alpha.0"
   }
