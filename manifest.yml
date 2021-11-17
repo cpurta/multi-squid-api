@@ -6,7 +6,7 @@ hydraVersion: "4"
 typegen:
   metadata:
     source: wss://kusama-rpc.polkadot.io/
-    blockHash: '0x45eb7ddd324361adadd4f8cfafadbfb7e0a26393a70a70e5bee6204fc46af62e'
+    blockHash: '0x98af7de0c69107bcdd5033d84cfee0e331514dc42e0a45b9d64e82b0dcec13a2'
   events:
     - balances.Transfer
   calls:

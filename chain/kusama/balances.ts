@@ -7,21 +7,16 @@ import { AccountId, Balance } from "@polkadot/types/interfaces";
 
 export namespace Balances {
   /**
-   *  Transfer succeeded (from, to, value, fees).
+   *  Transfer succeeded. \[from, to, value\]
    *
-   *  Event parameters: [AccountId, AccountId, Balance, Balance, ]
+   *  Event parameters: [AccountId, AccountId, Balance, ]
    */
   export class TransferEvent {
-    public readonly expectedParamTypes = [
-      "AccountId",
-      "AccountId",
-      "Balance",
-      "Balance",
-    ];
+    public readonly expectedParamTypes = ["AccountId", "AccountId", "Balance"];
 
     constructor(public readonly ctx: SubstrateEvent) {}
 
-    get params(): [AccountId, AccountId, Balance, Balance] {
+    get params(): [AccountId, AccountId, Balance] {
       return [
         createTypeUnsafe<AccountId & Codec>(typeRegistry, "AccountId", [
           this.ctx.params[0].value,
@@ -31,9 +26,6 @@ export namespace Balances {
         ]),
         createTypeUnsafe<Balance & Codec>(typeRegistry, "Balance", [
           this.ctx.params[2].value,
-        ]),
-        createTypeUnsafe<Balance & Codec>(typeRegistry, "Balance", [
-          this.ctx.params[3].value,
         ]),
       ];
     }

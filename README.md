@@ -11,6 +11,29 @@ can pull and process multiple chains. There is a slightly modified `schema.graph
 * Node v14x
 * Docker
 
+## Bootstrap
+
+```bash
+# The dependencies setup relies on de-duplication, use `ci` to get everything right
+npm ci
+
+# Start a postgres instance
+docker-compose up db # add optional -d flag to detach from terminal
+
+# Apply migrations related to the processor's state keeping tables
+npm run processor:migrate
+
+# Apply the project's migrations
+npm run db:migrate
+
+# Now you can start processing chain data
+npm run processor:start
+
+# The above command will block
+# Open a separate terminal and launch the graphql server to query the processed data
+npm run query-node:start
+```
+
 ## Chain Type Generation
 
 Currently, in order to support multiple chains with the type generation (typegen). You can generate
@@ -69,29 +92,6 @@ NOTE: There has been some work done to support multiple metadata sources and gen
 the type generations given multiple entries/sources [here](https://github.com/cpurta/hydra/tree/support-multiple-metadata-sources/packages/hydra-typegen).
 This work is **currently being tested** and has yet to be published on NPM as a package
 and imported into this project for ease of generating the multiple chain types. 
-
-## Bootstrap
-
-```bash
-# The dependencies setup relies on de-duplication, use `ci` to get everything right
-npm ci
-
-# Start a postgres instance
-docker-compose up db # add optional -d flag to detach from terminal
-
-# Apply migrations related to the processor's state keeping tables
-npm run processor:migrate
-
-# Apply the project's migrations
-npm run db:migrate
-
-# Now you can start processing chain data
-npm run processor:start
-
-# The above command will block
-# Open a separate terminal and launch the graphql server to query the processed data
-npm run query-node:start
-```
 
 ## Project structure
 
@@ -152,6 +152,4 @@ For more details, please checkout https://docs.subsquid.io.
 
 ## Developer Notes
 
-Currently as of 2021/11/6 the public Polkadot idexer has been somewhat spotty in fetching block data
-and queuing those blocks to be processed by the processor. This has lead to the Kusama chain being
-processed and the Polkadot chain waiting for blocks.
+None known at the moment.
