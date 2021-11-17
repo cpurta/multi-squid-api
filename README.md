@@ -85,6 +85,42 @@ query {
 }
 ```
 
+Response:
+
+```json
+{
+  "data": {
+    "accounts": [
+      {
+        "id": "0x2dcc5638cc58a19c9050837a6b9537346df8caea9e7d72e5a242ada57494c4e1",
+        "wallet": "5D6kiHiTYaEQpHcNt2bvWRCfCFQSwda9nkSHiWamTqpNJmtj",
+        "balance": "1000000000000",
+        "substrateChain": "kusama"
+      },
+      {
+        "id": "0x3cd95f701f08e5cd36078c7e63d1254f0e66977175ed55cc5e42af05d0d8af37",
+        "wallet": "5DSVJZ55ey4hsAA9x6gRomqaioDovTrWRKeft3CCcov66giz",
+        "balance": "1000000000000",
+        "substrateChain": "kusama"
+      },
+      {
+        "id": "0xff32d83b31df2d73a27ef6763e297b329977f62e4b87d775eb4a2bae26b11eed",
+        "wallet": "5HqKAv7QLmGqk2QgkUV77JA13JTcFbWW65DskVzZECdbRUeT",
+        "balance": "1000000000000",
+        "substrateChain": "kusama"
+      },
+      ...
+      {
+        "id": "0x1df2dac62aeb811610c013b84eabac613a4edc1cf534b7f6ad5e16bac26d45a7",
+        "wallet": "5CjyPVqJGZJdzrxXLCQ25Qa4PJgs6xvB5693WcbiouESy8RG",
+        "balance": "1000000000000",
+        "substrateChain": "kusama"
+      }
+    ]
+  }
+}
+```
+
 ## Chain Type Generation
 
 Currently, in order to support multiple chains with the type generation (typegen). You can generate
