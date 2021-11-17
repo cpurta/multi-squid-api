@@ -34,6 +34,57 @@ npm run processor:start
 npm run query-node:start
 ```
 
+## Querying the SubSquid API
+
+### Hello
+
+Assuming that you have done the previous bootstrap commands you should then be able to query
+the locally running graphql endpoint (`http://localhost:4000/graphql`) with the following query:
+
+```graphql
+query {
+  hello {
+    greeting
+  }
+}
+```
+
+Which should provide a response similar to:
+
+```json
+{
+  "data": {
+    "hello": {
+      "greeting": "Hello, we've seen 61812 Kusama transfers, and 36596 Polkadot transfers"
+    }
+  }
+}
+```
+
+The number of transfers should change assuming that the processor is continually running with out any
+issues. 
+
+### Accounts
+
+You can specify which chain you want in the `where` clause of your GQL query using the
+`substrateChain_eq` 
+
+```graphql
+query {
+  accounts(
+    limit: 100,
+    where: {
+      substrateChain_eq: "kusama"
+    }
+  ) {
+    id,
+    wallet,
+    balance,
+    substrateChain,
+  }
+}
+```
+
 ## Chain Type Generation
 
 Currently, in order to support multiple chains with the type generation (typegen). You can generate
@@ -46,7 +97,7 @@ Here is what the `typegen` portion of the `manifest.yml` file will look like to 
 typegen:
   metadata:
     source: wss://kusama-rpc.polkadot.io/
-    blockHash: '0x45eb7ddd324361adadd4f8cfafadbfb7e0a26393a70a70e5bee6204fc46af62e'
+    blockHash: '0x98af7de0c69107bcdd5033d84cfee0e331514dc42e0a45b9d64e82b0dcec13a2'
   events:
     - balances.Transfer
   calls:
@@ -70,7 +121,7 @@ In order to generate the Kusama `.ts` files you can flip the commented section o
 # typegen:
 #   metadata:
 #     source: wss://kusama-rpc.polkadot.io/
-#     blockHash: '0x45eb7ddd324361adadd4f8cfafadbfb7e0a26393a70a70e5bee6204fc46af62e'
+#     blockHash: '0x98af7de0c69107bcdd5033d84cfee0e331514dc42e0a45b9d64e82b0dcec13a2'
 #   events:
 #     - balances.Transfer
 #   calls:
@@ -91,7 +142,7 @@ typegen:
 NOTE: There has been some work done to support multiple metadata sources and generate
 the type generations given multiple entries/sources [here](https://github.com/cpurta/hydra/tree/support-multiple-metadata-sources/packages/hydra-typegen).
 This work is **currently being tested** and has yet to be published on NPM as a package
-and imported into this project for ease of generating the multiple chain types. 
+and imported into this project for ease of generating the multiple chain types.
 
 ## Project structure
 
